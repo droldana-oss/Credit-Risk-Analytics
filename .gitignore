@@ -1,0 +1,31 @@
+# Configuración local de agentes
+.copilot/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Datos fuente y derivados a nivel solicitante
+data/raw/*
+!data/raw/.gitkeep
+data/clean/*
+!data/clean/.gitkeep
+
+# Archivos temporales de Power BI
+powerbi/.pbi/
+powerbi/.cache/
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Contratos locales de metodología ArtFactory/Copilot
+specs/
