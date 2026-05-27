@@ -1,14 +1,20 @@
-# Power BI - To Do Del Dashboard De Riesgo Crediticio
+# Power BI - Dashboard De Riesgo Crediticio
 
 ## Objetivo
 
-Esta carpeta queda preparada para que construya posteriormente un dashboard
-ejecutivo con el archivo local `data/clean/credit_risk_clean.csv`. El dashboard
-debe presentar patrones descriptivos de dificultad de pago y exposición
-financiera; no debe mostrarse como un modelo predictivo ni un sistema de
-aprobación automática.
+Esta carpeta contiene el dashboard ejecutivo construido con el archivo local
+`data/clean/credit_risk_clean.csv`. Presenta patrones descriptivos de
+dificultad de pago y exposición financiera; no representa un modelo predictivo
+ni un sistema de aprobación automática.
 
-## Insumo
+## Vista Previa
+
+![Vista general del dashboard de riesgo crediticio](../images/credit_risk_dashboard_overview.png)
+
+El archivo editable se encuentra en
+[`archivo de power bi.pbix`](archivo%20de%20power%20bi.pbix).
+
+## Insumo Y Reproducción
 
 1. Ejecutar los notebooks `01` a `04` en orden.
 2. Confirmar que se generó `data/clean/credit_risk_clean.csv`.
@@ -18,7 +24,7 @@ aprobación automática.
 El CSV se mantiene local y está ignorado en Git porque conserva datos a nivel
 de solicitud. Al publicar el repositorio, usar capturas y resultados agregados.
 
-## Medidas DAX Recomendadas
+## Medidas DAX
 
 ```DAX
 Total Solicitudes =
@@ -49,73 +55,42 @@ AVERAGE(credit_risk_clean[AGE])
 Formatear `Tasa Dificultad` como porcentaje con dos decimales y los montos
 como moneda o número con separador de miles, según el estilo elegido.
 
-## Páginas Sugeridas
+## Vista Ejecutiva Implementada
 
-### Página 1 - Vista Ejecutiva
-
-| Elemento | Configuración |
+| Elemento | Lectura presentada |
 |---|---|
-| Tarjetas | Total solicitudes, tasa dificultad, crédito promedio, ingreso promedio |
-| Dona o barra | `TARGET_LABEL` por total de solicitudes |
-| Barras | Tasa de dificultad por `INCOME_SEGMENT` |
-| Filtros | Tipo de contrato, educación, ocupación y vivienda |
+| Tarjetas KPI | Total de clientes, ingreso promedio, crédito promedio y tasa de incumplimiento |
+| Barras por género | Diferencia observada de incumplimiento entre categorías |
+| Barras por tipo de préstamo | Comparación entre préstamos tradicionales y créditos revolving |
+| Dispersión | Relación entre ingreso y monto del crédito, distinguida por `TARGET` |
+| Barras por educación | Comparación agregada de dificultad de pago por nivel educativo |
+| Barras por tipo de ingreso | Perfiles laborales con mayores tasas observadas |
+| Barras por hijos | Variación de la tasa según cantidad de dependientes |
 
-Mensaje: la cartera tiene una tasa general de dificultad de pago, y el
-dashboard permite ubicar diferencias agregadas entre segmentos.
+La vista está diseñada para comunicar asociaciones históricas por segmento.
+Las comparaciones sociodemográficas no deben convertirse en criterios aislados
+para decisiones crediticias.
 
-### Página 2 - Perfil Financiero
-
-| Visual | Campos |
-|---|---|
-| Columnas | `CREDIT_INCOME_SEGMENT` y medida `Tasa Dificultad` |
-| Barras | `INCOME_SEGMENT` y medida `Tasa Dificultad` |
-| Dispersión | `AMT_INCOME_TOTAL` vs. `AMT_CREDIT`, leyenda `TARGET_LABEL` |
-| Tabla | `ANALYTICAL_PROFILE`, solicitudes y tasa |
-
-Mensaje: el ratio crédito/ingreso describe exposición, pero en el análisis no
-presentó un aumento monotónico de la dificultad de pago.
-
-### Página 3 - Perfil Sociodemográfico
-
-| Visual | Campos |
-|---|---|
-| Barras | `AGE_GROUP` y tasa dificultad |
-| Barras horizontales | `OCCUPATION_TYPE` y tasa; filtrar grupos con suficiente volumen |
-| Barras | `NAME_EDUCATION_TYPE` y tasa |
-| Comparación | `FLAG_OWN_REALTY` y tasa |
-
-Mensaje: estas variables muestran asociaciones históricas agregadas; no deben
-utilizarse aisladamente para aprobar o negar solicitudes.
-
-### Página 4 - Conclusiones Y Seguimiento
-
-| Elemento | Contenido |
-|---|---|
-| Tabla priorizada | Segmento, total solicitudes, clientes con dificultad, tasa |
-| Tarjeta | Segmento de mayor tasa visible bajo filtros |
-| Cuadro de texto | Limitaciones del análisis y próximos pasos |
-| Navegación | Botones a las otras tres páginas |
-
-## Validaciones Antes De Publicar
+## Validaciones De Presentación
 
 - Verificar que los totales coincidan con el reporte de Python: 307.511
   solicitudes y 8,07% de dificultad de pago.
 - Validar que cada gráfico muestre volumen además de tasa cuando se comparen
   segmentos pequeños.
 - Ocultar cualquier identificador si se añaden otras tablas en una extensión.
-- Exportar capturas a `reports/dashboard_screenshots/` para que GitHub pueda
-  mostrar el dashboard sin abrir Power BI.
+- Mantener la captura `images/credit_risk_dashboard_overview.png` actualizada
+  si el archivo Power BI recibe cambios.
 
-## Archivo A Guardar
+## Archivo Entregado
 
-Guardar el entregable en esta carpeta:
+El entregable versionado en esta carpeta es:
 
 ```text
-powerbi/credit_risk_dashboard.pbix
+powerbi/archivo de power bi.pbix
 ```
 
 Para un control de versiones más detallado, también se puede guardar como
 proyecto Power BI (`.pbip`) y versionar su estructura. Esta opción puede
 requerir habilitar la característica de proyecto en Power BI Desktop. El
-`.gitignore` ya excluye los archivos locales de caché de `.pbi`; aun así, debo
-revisar siempre que no se publique información que no deba estar expuesta.
+`.gitignore` ya excluye los archivos locales de caché de `.pbi`; aun así, se
+debe revisar siempre que no se publique información que no deba estar expuesta.

@@ -54,7 +54,7 @@ información a nivel de solicitud y son artefactos pesados.
 | Entendimiento de datos | Reviso dimensiones, `TARGET`, nulos y anomalías | `02_data_understanding.ipynb` |
 | Preparación | Limpio variables y creo indicadores financieros | `03_data_cleaning_feature_engineering.ipynb` |
 | EDA y conclusiones | Comparo tasas por segmentos y exporto gráficos/reporte | `04_exploratory_credit_risk_analysis.ipynb` |
-| Dashboard | Dejo el paso a paso para construir Power BI | `powerbi/README.md` |
+| Dashboard ejecutivo | Presento los indicadores y segmentos en Power BI | [`powerbi/archivo de power bi.pbix`](powerbi/archivo%20de%20power%20bi.pbix) |
 
 ## Indicadores Creados
 
@@ -110,17 +110,28 @@ El informe reproducible está en
 |---|---|
 | ![Edad y ocupación](images/demographic_segments_default_rate.png) | ![Educación y perfil financiero](images/education_and_exposure_profile.png) |
 
+### Dashboard Ejecutivo En Power BI
+
+El análisis se consolidó en un dashboard ejecutivo que permite leer los KPIs
+generales y contrastar la dificultad de pago observada por género, tipo de
+préstamo, nivel educativo, tipo de ingreso y cantidad de hijos.
+
+![Vista general del dashboard de riesgo crediticio](images/credit_risk_dashboard_overview.png)
+
+- **Archivo Power BI:** [`powerbi/archivo de power bi.pbix`](powerbi/archivo%20de%20power%20bi.pbix)
+- **Documentación del dashboard:** [powerbi/README.md](powerbi/README.md)
+
 ## Power BI
 
-El dashboard queda intencionalmente como fase posterior para construcción
-manual. La guía completa se encuentra en [powerbi/README.md](powerbi/README.md)
-y contiene:
+El dashboard fue construido manualmente en Power BI Desktop a partir del CSV
+limpio generado por los notebooks. La guía completa se encuentra en
+[powerbi/README.md](powerbi/README.md) y documenta:
 
 - Fuente que debe cargarse: `data/clean/credit_risk_clean.csv`.
-- Medidas DAX sugeridas para tarjetas y tasas.
-- Propuesta de cuatro páginas: vista ejecutiva, perfil financiero, perfil
-  sociodemográfico y conclusiones.
-- Validaciones y recomendaciones para publicar capturas del dashboard.
+- Medidas DAX para tarjetas y tasas.
+- Componentes incluidos en la vista ejecutiva.
+- Validaciones de resultados y límites de interpretación.
+- Archivo `.pbix` descargable y captura visible desde GitHub.
 
 ## Estructura Del Repositorio
 
@@ -129,12 +140,12 @@ credit-risk-analytics/
 ├── data/
 │   ├── raw/                         # Dataset fuente local, ignorado
 │   └── clean/                       # CSV para Power BI local, ignorado
-├── images/                          # Gráficos exportados del EDA
+├── images/                          # Gráficos del EDA y vista previa del dashboard
 ├── notebooks/                       # Storytelling y análisis ejecutado
-├── powerbi/                         # To do y futuro dashboard
+├── powerbi/                         # Archivo .pbix y documentación del dashboard
 ├── reports/
 │   ├── credit_risk_analysis_report.md
-│   └── dashboard_screenshots/       # Capturas futuras de Power BI
+│   └── dashboard_screenshots/       # Espacio opcional para capturas adicionales
 ├── specs/                           # Contratos ArtFactory locales, ignorados en Git
 ├── requirements.txt
 └── README.md
@@ -194,5 +205,5 @@ El proyecto transforma una base amplia de solicitudes en una lectura ejecutiva
 y reproducible del riesgo crediticio observado. El análisis encuentra diferencias
 relevantes en algunos segmentos, pero también demuestra algo importante: una
 regla financiera sencilla no necesariamente separa el incumplimiento. Esa
-conclusión permite diseñar un dashboard útil y honesto, sin presentar análisis
-descriptivo como predicción.
+conclusión se presenta en un dashboard útil y honesto, sin mostrar análisis
+descriptivo como predicción o decisión automatizada.
